@@ -21,7 +21,7 @@ services:
           name: traffic-violation-redis
           property: connectionString
       - key: ALLOWED_ORIGINS
-        value: "*"
+        value: '["*"]'
       - key: UPLOAD_DIR
         value: "/tmp/uploads"
       - key: EVIDENCE_DIR

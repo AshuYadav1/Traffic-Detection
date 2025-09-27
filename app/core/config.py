@@ -3,8 +3,9 @@ Application configuration settings
 """
 
 import os
-from typing import List
+from typing import List, Union
 from pydantic_settings import BaseSettings
+from pydantic import field_validator
 
 class Settings(BaseSettings):
     # API Settings
@@ -15,7 +16,17 @@ class Settings(BaseSettings):
     BASE_DIR: str = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     
     # CORS Settings - Allow all origins for development
-    ALLOWED_ORIGINS: List[str] = ["*"]
+    ALLOWED_ORIGINS: Union[List[str], str] = ["*"]
+    
+    @field_validator('ALLOWED_ORIGINS', mode='before')
+    @classmethod
+    def parse_allowed_origins(cls, v):
+        if isinstance(v, str):
+            # Handle string format like "*" or comma-separated values
+            if v == "*":
+                return ["*"]
+            return [origin.strip() for origin in v.split(",")]
+        return v
     
     # File Upload Settings
     UPLOAD_DIR: str = os.getenv("UPLOAD_DIR", "uploads")
