@@ -1,35 +1,55 @@
+# Core FastAPI dependencies
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
 python-multipart==0.0.6
-opencv-python-headless==4.8.1.78
-ultralytics==8.0.196
-torch==2.1.0
-torchvision==0.16.0
-torchaudio==2.1.0
-numpy==1.24.3
-scikit-learn==1.3.2
-joblib==1.3.2
-pyyaml==6.0.1
-tqdm==4.66.1
-Pillow==10.1.0
-python-jose[cryptography]==3.3.0
-passlib[bcrypt]==1.7.4
+pydantic-settings==2.0.3
 python-dotenv==1.0.0
+
+# Database and ORM
 sqlalchemy==2.0.23
 alembic==1.12.1
 psycopg2-binary==2.9.9
+
+# Authentication and security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# Task queue and caching
 redis==5.0.1
 celery==5.3.4
+
+# WebSocket support
 websockets==12.0
 aiofiles==23.2.1
-lap==0.5.12
-geopy==2.4.1
-easyocr==1.7.0
-tensorflow==2.20.0
+
+# HTTP client and utilities
+requests==2.31.0
 aiohttp==3.9.1
 beautifulsoup4==4.12.2
+
+# Geographic utilities
+geopy==2.4.1
+
+# PDF and QR code generation
 reportlab==4.0.8
 qrcode==7.4.2
-shap==0.48.0
-pydantic-settings==2.0.3
-requests==2.31.0
+
+# Core dependencies with flexible versions
+numpy>=1.21.0,<1.25.0
+Pillow>=9.0.0,<11.0.0
+opencv-python-headless>=4.5.0,<4.9.0
+
+# PyTorch CPU-only (lighter for deployment)
+torch>=1.13.0,<2.1.0
+torchvision>=0.14.0,<0.16.0
+
+# YOLO (will auto-install compatible dependencies)
+ultralytics>=8.0.0,<8.1.0
+
+# Machine learning
+scikit-learn>=1.0.0,<1.4.0
+joblib>=1.0.0,<2.0.0
+
+# Utilities
+pyyaml>=5.4.0,<7.0.0
+tqdm>=4.60.0,<5.0.0
