@@ -12,12 +12,14 @@ services:
       - key: PYTHON_VERSION
         value: 3.10.8
       - key: DATABASE_URL
-        generateValue: true
-        type: sqlite
+        fromDatabase:
+          name: traffic-violation-db
+          property: connectionString
       - key: REDIS_URL
         fromService:
           type: redis
           name: traffic-violation-redis
+          property: connectionString
       - key: ALLOWED_ORIGINS
         value: "*"
       - key: UPLOAD_DIR
@@ -42,6 +44,7 @@ services:
     plan: free
     region: oregon
     maxmemoryPolicy: allkeys-lru
+    ipAllowList: []
 
 databases:
   - name: traffic-violation-db
@@ -49,3 +52,4 @@ databases:
     user: admin
     plan: free
     region: oregon
+    ipAllowList: []
