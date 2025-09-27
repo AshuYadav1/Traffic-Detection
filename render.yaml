@@ -1,0 +1,51 @@
+services:
+  - type: web
+    name: traffic-violation-api
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    plan: free
+    region: oregon
+    branch: main
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.8
+      - key: DATABASE_URL
+        generateValue: true
+        type: sqlite
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: traffic-violation-redis
+      - key: ALLOWED_ORIGINS
+        value: "*"
+      - key: UPLOAD_DIR
+        value: "/tmp/uploads"
+      - key: EVIDENCE_DIR
+        value: "/tmp/evidence"
+      - key: MODEL_SIZE
+        value: "small"
+      - key: DEFAULT_CONFIDENCE_THRESHOLD
+        value: "0.5"
+      - key: DEFAULT_IOU_THRESHOLD
+        value: "0.45"
+      - key: MIN_MOTORCYCLE_AREA
+        value: "3000"
+      - key: HELMET_CHECK_CONFIDENCE
+        value: "0.6"
+      - key: DEFAULT_TRAFFIC_DIRECTION
+        value: "right"
+
+  - type: redis
+    name: traffic-violation-redis
+    plan: free
+    region: oregon
+    maxmemoryPolicy: allkeys-lru
+
+databases:
+  - name: traffic-violation-db
+    databaseName: traffic_violations
+    user: admin
+    plan: free
+    region: oregon

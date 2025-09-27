@@ -1,0 +1,39 @@
+# Environment variables for Traffic Violation Detection API
+
+# API Settings
+API_V1_STR=/api/v1
+PROJECT_NAME=Traffic Violation Detection API
+
+# CORS Settings (comma-separated list)
+ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8080,http://127.0.0.1:3000,http://127.0.0.1:8080
+
+# File Upload Settings
+UPLOAD_DIR=uploads
+EVIDENCE_DIR=evidence
+MAX_FILE_SIZE=524288000  # 500MB in bytes
+ALLOWED_VIDEO_TYPES=video/mp4,video/avi,video/mov,video/mkv
+
+# Model Settings
+MODEL_SIZE=small
+YOLO_MODEL_PATH=models/yolov8s.pt
+SVM_MODEL_PATH=models/svm_model.pkl
+PCA_MODEL_PATH=models/pca.pkl
+
+# Database Settings
+DATABASE_URL=sqlite:///./traffic_violations.db
+# For PostgreSQL: postgresql://username:password@localhost:5432/traffic_violations
+
+# Redis Settings
+REDIS_URL=redis://localhost:6379
+
+# Processing Settings
+DEFAULT_CONFIDENCE_THRESHOLD=0.5
+DEFAULT_IOU_THRESHOLD=0.45
+MIN_MOTORCYCLE_AREA=3000
+HELMET_CHECK_CONFIDENCE=0.6
+
+# Traffic Direction Settings
+DEFAULT_TRAFFIC_DIRECTION=right
+
+# WebSocket Settings
+WEBSOCKET_HEARTBEAT_INTERVAL=30
